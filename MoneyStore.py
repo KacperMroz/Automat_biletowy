@@ -15,7 +15,7 @@ class MoneyStore:
         else:
             print("Unknown format of money")  # TODO: oblsluga bledu
 
-    def takeMoney(self, value):
+    def takeMoney(self, value):         #TODO: zastanowic sie czy ta funkcja wgl jest potrzebna
         if value in self.list_of_money_in_machine:
             self.list_of_money_in_machine.remove(value)
         else:
@@ -24,7 +24,7 @@ class MoneyStore:
     def sumOfCoins(self):
         return sum(self.list_of_money_in_machine)
 
-    def giveChange(self, price, amount): #TODO: obsluga bledu
+    def giveChange(self, price, amount): #TODO: napisac obluge bledu. Tak zeby w przypadku braku mozliwosci wydania reszty program  przechodzil do procedury else i oddawal pieniadze
         change = sum(amount) - price
         list_of_money_to_return = []
         while change>0:
@@ -36,4 +36,5 @@ class MoneyStore:
         else:
             self.giveChange(amount, 0)
 
+        #TODO: dopisac usuwanie z listy wydanych pieniedzy.
 
