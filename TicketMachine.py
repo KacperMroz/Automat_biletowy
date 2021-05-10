@@ -2,13 +2,19 @@ from MoneyStore import MoneyStore
 from Tickets import *
 
 class TicketMachine(MoneyStore):
-    _sum = 0
+    suma = 0
 
     def __init__(self):
-        pass
+        super().__init__()
 
     def buyTicket(self, ticket_price):
-        self._sum += ticket_price
+        self.suma += ticket_price
+        print("Do koszyka dodado bilet o wartosci " + str(ticket_price) + " zl")
+
+    def returnSum(self):
+        return self.suma
 
     def endOfTransaction(self):
-        self._sum = 0
+        print(self.suma)
+        self.suma = 0
+
