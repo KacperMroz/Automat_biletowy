@@ -40,7 +40,7 @@ class Gui:
         l1 = Label(window, text='Wrzuc pieniadze')
         l1.place(x=200, y=0)
 
-        # przyciski od mone
+        # przyciski od monet
 
         self.wrzucone = 0
         w = Label(window, text="Wrzucone monety: " + str(self.wrzucone))
