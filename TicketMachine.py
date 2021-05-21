@@ -15,6 +15,5 @@ class TicketMachine(MoneyStore):
         return self.suma
 
     def endOfTransaction(self):
-        print(self.suma)
         self.suma = 0
 

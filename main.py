@@ -34,7 +34,7 @@
 #
 # monety= [0.01,0.02,0.05,0.1,0.2,0.5,1,2,5]
 # i=0
-# y1=20
+#
 # for nominal in monety:
 #     p = Button(window, text = str(nominal), width=5)
 #     p.place(x=200, y = y1)
@@ -88,25 +88,26 @@
 #
 # window.mainloop()
 
-from tkinter import Tk, Label, Button
+# from tkinter import Tk, Label, Button
+#
+# class A_GUI:
+#     def __init__(self, master):
+#         self.x = 0
+#
+#         self.master = master
+#         master.title("Tytulik")
+#
+#         self.label = Label(master, text="Tekst startowy")
+#         self.label.pack()
+#
+#         self.greet_button = Button(master, text="Zmiana", command=self.zmiana)
+#         self.greet_button.pack()
+#
+#     def zmiana(self):
+#         self.x += 1
+#         self.label.configure(text="Nowa wartość: "+str(self.x))
+#
+# root = Tk()
+# my_gui = A_GUI(root)
+# root.mainloop()
 
-class A_GUI:
-    def __init__(self, master):
-        self.x = 0
-
-        self.master = master
-        master.title("Tytulik")
-
-        self.label = Label(master, text="Tekst startowy")
-        self.label.pack()
-
-        self.greet_button = Button(master, text="Zmiana", command=self.zmiana)
-        self.greet_button.pack()
-
-    def zmiana(self):
-        self.x += 1
-        self.label.configure(text="Nowa wartość: "+str(self.x))
-
-root = Tk()
-my_gui = A_GUI(root)
-root.mainloop()

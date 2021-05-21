@@ -10,7 +10,7 @@ class MoneyStore:
 
     def addMoney(self, value):
         if value in self._list_of_money_format:
-            self.value = Decimal(str(value))
+            self.value = value
             self.list_of_money_in_machine.append(value)
         else:
             print("Unknown format of money")  # TODO: oblsluga bledu
@@ -22,19 +22,31 @@ class MoneyStore:
             print("No such value in  machine ")  # TODO: oblsluga bledu
 
     def sumOfCoins(self):
+        print("Suma pieniedzy w biletomacie to ", sum(self.list_of_money_in_machine))
         return sum(self.list_of_money_in_machine)
 
     def giveChange(self, price, amount): #TODO: napisac obluge bledu. Tak zeby w przypadku braku mozliwosci wydania reszty program  przechodzil do procedury else i oddawal pieniadze
-        change = sum(amount) - price
+        change = amount - price
         list_of_money_to_return = []
         while change>0:
             #try:
             maxValueToReturn = max(filter(lambda i : i <= change, self.list_of_money_in_machine))
             #except ValueError():
             list_of_money_to_return.append(maxValueToReturn)
+            self.takeMoney(maxValueToReturn)
             change -= maxValueToReturn
-        else:
-            self.giveChange(amount, 0)
+
+        print("Reszta to:",sum(list_of_money_to_return))
+        print("Wydana w ", list_of_money_to_return)
+
 
         #TODO: dopisac usuwanie z listy wydanych pieniedzy.
 
+p = MoneyStore()
+p.addMoney(2)
+p.addMoney(2)
+p.addMoney(2)
+p.addMoney(2)
+print(p.sumOfCoins())
+p.giveChange(4, 8)
+print(p.sumOfCoins())
