@@ -111,3 +111,43 @@
 # my_gui = A_GUI(root)
 # root.mainloop()
 
+# def returnChange(self, prize, amount) :
+#     '''algorithm for spending the change, returns string displayed on message box after transaction'''
+#     changeList = []
+#     change = amount - prize
+#     if change in self.list_of_money_in_machine :
+#         changeList.append(change)
+#     else :
+#         for i in [float(c) for c in self.list_of_money_in_machine if c <= float(change)] :
+#             if change == 0 :
+#                 break
+#             changeList.append(Decimal(str(i)))
+#             change -= Decimal(str(i))
+#             # self._actuallyInMachine.remove(i)
+#         else :
+#             if change == 0 and len(changeList) == 0 :
+#                 self.list_of_money_in_machine = [i for i in self.list_of_money_in_machine if i not in changeList]
+#                 return "Kupiłeś bilet za odliczoną kwotę"
+#             elif change != 0 :
+#                 return "Nie mogę wydać ci reszty\n Nie kupiłeś biletu\n oddaje:" + str(
+#                     ", ".join([str(float(i)) for i in self.money_added_by_customer]))
+#     return "Twoja reszta :\n" + str(", ".join([str(float(i)) for i in changeList]))
+
+
+
+
+
+
+
+
+l1 = [1,2,2] #dostepne monety
+l3 = [1,2] #wydane monety
+
+
+
+for element in l3:
+    if element in l1:
+        l1.remove(element)
+
+
+print(l1)

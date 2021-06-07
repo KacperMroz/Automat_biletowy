@@ -36,7 +36,7 @@ class Gui:
         b2.place(x=0, y=45)
 
         b3 = Button(window, text='bilet 40 minut ulgowy', width=20,
-                    command=lambda : [suma.buyTicket(3.50), s.configure(text="Suma do zaplaty " + str(suma.suma))])
+                    command=lambda : [suma.buyTicket(3.5), s.configure(text="Suma do zaplaty " + str(suma.suma))])
         b3.place(x=0, y=70)
 
         b4 = Button(window, text='bilet 40 minut normalny', width=20,
@@ -55,7 +55,7 @@ class Gui:
         # przyciski od monet
 
 
-        p1 = Button(window, text='1gr', width=5,command = lambda: [self.dodaj(0.01), transakcja.addMoney(0.01),transakcja.sumOfCoins() , w.configure(text="Wrzucone pieniadze "+str(self.wrzucone))])
+        p1 = Button(window, text='1gr', width=5,command = lambda: [self.dodaj(0.01), transakcja.addMoney(0.01), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone))])
         p1.place(x=200, y=20)
 
         p2 = Button(window, text='2gr', width=5,command = lambda: [self.dodaj(0.02),transakcja.addMoney(0.02), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone))])
@@ -94,17 +94,20 @@ class Gui:
         p10.place(x=245, y=95)
 
         # przycisk zakoncz
-        zakoncz = Button(window, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [transakcja.giveChange(suma.suma, self.wrzucone), suma.endOfTransaction(), s.configure(text="Suma do zaplaty " + str(suma.suma)), self.zeruj(), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone))])
+        zakoncz = Button(window, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [self.podsumowanie(suma.suma),transakcja.giveChange(suma.suma, self.wrzucone), suma.endOfTransaction(), s.configure(text="Suma do zaplaty " + str(suma.suma)), self.zeruj(), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone))])
         zakoncz.place(x=190, y=270)
 
         window.mainloop()
 
     def dodaj(self,value):
-        self.wrzucone += value
-        self.wrzucone = round(self.wrzucone,2)
+        self.wrzucone += Decimal(str(value))
 
     def zeruj(self):
         self.wrzucone = 0
+
+    def podsumowanie(self, suma):
+        print("Kupiono biletów za: "+ str(suma) + "zł")
+        print("Wrzucono: "+str(self.wrzucone) + "zł")
 
 
 

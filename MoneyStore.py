@@ -2,16 +2,18 @@ from decimal import *
 
 
 class MoneyStore:
-    _list_of_money_format = [0.01, 0.02, 0.05, 0.01, 0.2, 0.5, 1, 2, 5, 10, 20, 50]
+    _list_of_money_format = [0.01, 0.02, 0.05, 0.10, 0.2, 0.5, 1, 2, 5, 10, 20, 50, 100]
 
     def __init__(self):
         self.list_of_money_in_machine = []
         self.value = 0
+        self.money_added_by_customer = []
 
     def addMoney(self, value):
         if value in self._list_of_money_format:
             self.value = value
-            self.list_of_money_in_machine.append(value)
+            self.list_of_money_in_machine.append(Decimal(str(value)))
+            self.money_added_by_customer.append(Decimal(str(value)))
         else:
             print("Unknown format of money")  # TODO: oblsluga bledu
 
@@ -23,30 +25,44 @@ class MoneyStore:
 
     def sumOfCoins(self):
         print("Suma pieniedzy w biletomacie to ", sum(self.list_of_money_in_machine))
+        print("Pieniadze w automacie: "+ str(", ".join([str(float(i)) for i in self.list_of_money_in_machine])))
         return sum(self.list_of_money_in_machine)
 
-    def giveChange(self, price, amount): #TODO: napisac obluge bledu. Tak zeby w przypadku braku mozliwosci wydania reszty program  przechodzil do procedury else i oddawal pieniadze
+    def giveChange(self, price, amount):
         change = amount - price
-        list_of_money_to_return = []
-        while change>0:
-            #try:
-            maxValueToReturn = max(filter(lambda i : i <= change, self.list_of_money_in_machine))
-            #except ValueError():
-            list_of_money_to_return.append(maxValueToReturn)
-            self.takeMoney(maxValueToReturn)
-            change -= maxValueToReturn
+        changeList = []
+        czy_reszta_wydana = False
+        if price == 0:
+            self.takeMoneyFromList(self.list_of_money_in_machine, self.money_added_by_customer)
+            self.money_added_by_customer.clear()
+            return print("Nic nie kupiles!")
+        if change == 0 :
+            self.money_added_by_customer.clear()
+            return print("Kupiles bilet za odliczona kwote")
+        else:
+            for i in range(len(self.list_of_money_in_machine)):
+                if change == 0 :
+                    print("Twoja reszta : " + str(", ".join([str(float(i)) for i in changeList])))
+                    czy_reszta_wydana = True
+                    break
+                else :
+                    if self.list_of_money_in_machine[i] <= change :
+                        changeList.append(self.list_of_money_in_machine[i])
+                        change -= self.list_of_money_in_machine[i]
+            if change != 0 :
+                print("Nie moge wydac reszty!! TYLKO ODLICZONA KWOTA!!")
+                print("Oddaje: "+ str(", ".join([str(float(i)) for i in self.money_added_by_customer])))
 
-        print("Reszta to:",sum(list_of_money_to_return))
-        print("Wydana w ", list_of_money_to_return)
+        if(czy_reszta_wydana == False):
+            self.takeMoneyFromList(self.list_of_money_in_machine, self.money_added_by_customer)
+        else:
+            self.takeMoneyFromList(self.list_of_money_in_machine, changeList)
+
+        self.money_added_by_customer.clear()
 
 
-        #TODO: dopisac usuwanie z listy wydanych pieniedzy.
+    def takeMoneyFromList(self, money_list, change_list):
+        for element in change_list :
+            if element in money_list:
+                money_list.remove(element)
 
-p = MoneyStore()
-p.addMoney(2)
-p.addMoney(2)
-p.addMoney(2)
-p.addMoney(2)
-print(p.sumOfCoins())
-p.giveChange(4, 8)
-print(p.sumOfCoins())
