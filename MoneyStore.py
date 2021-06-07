@@ -32,6 +32,8 @@ class MoneyStore:
         change = amount - price
         changeList = []
         czy_reszta_wydana = False
+        if amount == 0:
+            return print("ZA DARMO NIC NIE DOSTANIESZ!!! WRZUC PIENIADZE")
         if price == 0:
             self.takeMoneyFromList(self.list_of_money_in_machine, self.money_added_by_customer)
             self.money_added_by_customer.clear()

@@ -18,7 +18,3 @@ class TicketMachine(MoneyStore):
 
         self.suma = 0
 
-p = TicketMachine()
-p.buyTicket(2)
-p.buyTicket(1)
-print(p.returnSum())

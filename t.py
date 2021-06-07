@@ -203,7 +203,7 @@ class t:
                                                                           self.wrzucone))])
         p10.place(x=135, y=35)
 
-        zakoncz = Button(okno_zaplaty, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [self.podsumowanie(),transakcja.giveChange(self.suma.suma, self.wrzucone), self.suma.endOfTransaction(), self.zeruj(), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone)), s.configure(text="Suma do zaplaty " + str(self.suma.suma))])
+        zakoncz = Button(okno_zaplaty, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [self.podsumowanie(self.suma.suma),transakcja.giveChange(self.suma.suma, self.wrzucone), self.suma.endOfTransaction(), self.zeruj(), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone)), s.configure(text="Suma do zaplaty " + str(self.suma.suma))])
         zakoncz.place(x=190, y=40)
 
 
@@ -213,12 +213,9 @@ class t:
     def zeruj(self):
         self.wrzucone = 0
 
-    def podsumowanie(self):
-        if self.suma.suma == 0:
-            pass
-        else:
-            print("Kupiono biletów za: "+ str(self.suma.suma) + "zł")
-            print("Wrzucono: "+str(self.wrzucone) + "zł")
+    def podsumowanie(self, suma):
+        print("Kupiono biletów za: "+ str(suma) + "zł")
+        print("Wrzucono: "+str(self.wrzucone) + "zł")
 
 
 
