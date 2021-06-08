@@ -3,14 +3,15 @@ from TicketMachine import *
 from MoneyStore import *
 from decimal import *
 
-class t:
+class Gui:
 
     def __init__(self):
-        self.suma = TicketMachine()
-        self.transakcja = MoneyStore()
+        """Konstruktor klasy GUI"""
+        self.machine = TicketMachine()
+        self.store = MoneyStore()
 
     def Interface(self):
-
+        """Główne okno interfejsu"""
         okno_wyboru = Tk()
         okno_wyboru.geometry('350x350')
 
@@ -88,33 +89,33 @@ class t:
 
         #przyciski do dodawania biletu
         b1 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(2), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val1.set(val1.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(2), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val1.set(val1.get() + 1)])
         b1.place(x=320, y=30)
 
         b2 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val2.set(val2.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val2.set(val2.get() + 1)])
         b2.place(x=320, y=60)
 
         b3 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(3.50), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val3.set(val3.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(3.50), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val3.set(val3.get() + 1)])
         b3.place(x=320, y=90)
 
         b4 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(7), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val4.set(val4.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(7), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val4.set(val4.get() + 1)])
         b4.place(x=320, y=120)
 
         b5 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val5.set(val5.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val5.set(val5.get() + 1)])
         b5.place(x=320, y=150)
 
         b6 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.suma.buyTicket(8), s.configure(text="Suma do zaplaty " + str(self.suma.suma)), val6.set(val6.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(8), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val6.set(val6.get() + 1)])
         b6.place(x=320, y=180)
 
 
         #napis wyswitlajacy sume
 
-        s = Label(okno_wyboru, text="Suma do zaplaty: " + str(self.suma.suma))
+        s = Label(okno_wyboru, text="Suma do zaplaty: " + str(self.machine.suma))
         s.place(x=0, y=220)
 
         #przycisk od zaplaty
@@ -127,6 +128,7 @@ class t:
         okno_wyboru.mainloop()
 
     def otworz_okno_zaplaty(self):
+        """Okno z wpłatami"""
         okno_zaplaty = Tk()
         okno_zaplaty.geometry('350x100')
 
@@ -135,7 +137,7 @@ class t:
 
         w = Label(okno_zaplaty, text="Wrzucone pieniadze " + str(self.wrzucone))
         w.place(x=0, y=80)
-        s = Label(okno_zaplaty, text="Suma do zaplaty: " + str(self.suma.suma))
+        s = Label(okno_zaplaty, text="Suma do zaplaty: " + str(self.machine.suma))
         s.place(x=0, y=65)
 
 
@@ -203,24 +205,27 @@ class t:
                                                                           self.wrzucone))])
         p10.place(x=135, y=35)
 
-        zakoncz = Button(okno_zaplaty, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [self.podsumowanie(),transakcja.giveChange(self.suma.suma, self.wrzucone), self.suma.endOfTransaction(), self.zeruj(), w.configure(text="Wrzucone pieniadze "+str(self.wrzucone)), s.configure(text="Suma do zaplaty " + str(self.suma.suma))])
+        zakoncz = Button(okno_zaplaty, text='Zakoncz transakcje', width=20, bg='red', command = lambda: [self.podsumowanie(), transakcja.giveChange(self.machine.suma, self.wrzucone), transakcja.clearCustomerMoneyList(), self.machine.endOfTransaction(), self.zeruj(), w.configure(text="Wrzucone pieniadze " + str(self.wrzucone)), s.configure(text="Suma do zaplaty " + str(self.machine.suma))])
         zakoncz.place(x=190, y=40)
 
 
     def dodaj(self, value) :
+        """Funkcja dodajaca wrzucone monety"""
         self.wrzucone += Decimal(str(value))
 
     def zeruj(self):
+        """Funkcja zerujaca wrzucone monety"""
         self.wrzucone = 0
 
     def podsumowanie(self):
-        if self.suma.suma == 0:
+        """Funkcja podsumujaca zakupy"""
+        if self.machine.suma == 0:
             pass
         else:
-            print("Kupiono biletów za: "+ str(self.suma.suma) + "zł")
+            print("Kupiono biletów za: " + str(self.machine.suma) + "zł")
             print("Wrzucono: "+str(self.wrzucone) + "zł")
 
 
 
-test = t()
+test = Gui()
 test.Interface()
