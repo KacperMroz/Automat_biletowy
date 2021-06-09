@@ -75,5 +75,6 @@ class MoneyStore:
                 money_list.remove(element)
 
     def clearCustomerMoneyList(self):
+        """Funkcja czyszczaca liste pieniedzy dodanych ostatnio przez klienta"""
         self.money_added_by_customer.clear()
 

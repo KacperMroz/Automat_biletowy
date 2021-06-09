@@ -2,6 +2,7 @@ from tkinter import *
 from TicketMachine import *
 from MoneyStore import *
 from decimal import *
+from Tickets import *
 
 class Gui:
 
@@ -9,6 +10,7 @@ class Gui:
         """Konstruktor klasy GUI"""
         self.machine = TicketMachine()
         self.store = MoneyStore()
+        self.ticket = Tickets()
 
     def Interface(self):
         """Główne okno interfejsu"""
@@ -68,7 +70,7 @@ class Gui:
         val5 = IntVar()
         val6 = IntVar()
 
-
+        #zmienne wywietlajace ilosc kupionych biletow danego typu
         ile1 = Label(okno_wyboru, textvar = str(val1))
         ile1.place(x=300, y=30)
 
@@ -89,27 +91,27 @@ class Gui:
 
         #przyciski do dodawania biletu
         b1 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(2), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val1.set(val1.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['20m ulgowy']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val1.set(val1.get() + 1)])
         b1.place(x=320, y=30)
 
         b2 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val2.set(val2.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['20m normalny']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val2.set(val2.get() + 1)])
         b2.place(x=320, y=60)
 
         b3 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(3.50), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val3.set(val3.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['40m ulgowy']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val3.set(val3.get() + 1)])
         b3.place(x=320, y=90)
 
         b4 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(7), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val4.set(val4.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['40m normalny']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val4.set(val4.get() + 1)])
         b4.place(x=320, y=120)
 
         b5 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(4), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val5.set(val5.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['60m ulgowy']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val5.set(val5.get() + 1)])
         b5.place(x=320, y=150)
 
         b6 = Button(okno_wyboru, text='+',
-                    command=lambda : [self.machine.buyTicket(8), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val6.set(val6.get() + 1)])
+                    command=lambda : [self.machine.buyTicket(self.ticket.tickets['60m normalny']), s.configure(text="Suma do zaplaty " + str(self.machine.suma)), val6.set(val6.get() + 1)])
         b6.place(x=320, y=180)
 
 
