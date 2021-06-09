@@ -17,7 +17,7 @@ class MoneyStore:
             self.list_of_money_in_machine.append(Decimal(str(value)))
             self.money_added_by_customer.append(Decimal(str(value)))
         else:
-            print("Unknown format of money")  # TODO: oblsluga bledu
+            print("Unknown format of money")
 
     def sumOfCoins(self):
         """Funkcja liczaca sume pieniedzy w biletomacie"""

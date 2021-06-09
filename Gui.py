@@ -227,7 +227,3 @@ class Gui:
             print("Kupiono biletów za: " + str(self.machine.suma) + "zł")
             print("Wrzucono: "+str(self.wrzucone) + "zł")
 
-
-
-test = Gui()
-test.Interface()
