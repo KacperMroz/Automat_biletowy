@@ -1,7 +1,6 @@
-from MoneyStore import MoneyStore
 from decimal import *
 
-class TicketMachine(MoneyStore):
+class TicketMachine():
     suma = 0
 
     def __init__(self):
