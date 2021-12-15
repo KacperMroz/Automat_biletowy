@@ -1,4 +1,4 @@
-# Student project about Ticket Machine written in Python. 
+# Student project about Ticket Machine written in Python...
 
 
 ## Functionality
